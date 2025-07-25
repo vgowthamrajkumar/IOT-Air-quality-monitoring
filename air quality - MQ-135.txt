@@ -1,0 +1,39 @@
+const int airSensorPin = A0;   \\MQ-135 connected to analog pin A0
+
+void setup() {
+  Serial.begin(9600);   \\Start Serial Monitor
+  Serial.println       \\(Air Quality Monitoring System Initialized);
+  delay(1000);   \\Give a short delay at the start
+}
+
+void loop() {
+   \\Read the analog value from the sensor (range 0 - 1023)
+  int rawValue = analogRead(airSensorPin);
+
+   \\Convert the analog reading into voltage (range 0V - 5V)
+  float voltage = rawValue  (5.0  1023.0);
+
+   \\Print the sensor data to Serial Monitor
+  Serial.print(Sensor Reading );
+  Serial.print(rawValue);
+  Serial.print(  Voltage );
+  Serial.print(voltage, 2);
+  Serial.print( V);
+
+   \\Estimate air quality based on raw value (rough interpretation)
+  if (rawValue  300) {
+    Serial.println( - Air Quality Good);
+  }
+  else if (rawValue  500) {
+    Serial.println( - Air Quality Moderate);
+  }
+  else if (rawValue  700) {
+    Serial.println( - Air Quality Poor);
+  }
+  else {
+    Serial.println( - Air Quality Very Poor);
+  }
+
+  \\ Wait for 2 seconds before taking the next reading
+  delay(2000);
+}
